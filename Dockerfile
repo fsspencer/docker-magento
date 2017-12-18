@@ -21,5 +21,3 @@ RUN usermod -u 1000 www-data
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
-
-COPY ./bin/set-base-url /usr/local/bin/set-base-url

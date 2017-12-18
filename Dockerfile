@@ -20,5 +20,10 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
 RUN usermod -u 1000 www-data
 RUN a2enmod rewrite
 
+COPY .docker/bin/* /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
+
+RUN setup-cron
+
 VOLUME /var/www/html
 WORKDIR /var/www/html

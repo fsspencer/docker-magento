@@ -2,7 +2,7 @@
 
 SRC_DIR=/var/www/html
 
-echo "*/1 * * * * su -c \"$SRC_DIR/cron.sh\" -s /bin/sh www-data > /proc/1/fd/2 2>&1" | crontab -l
+echo "*/1 * * * * /bin/sh \"$SRC_DIR/cron.sh\" > $SRC_DIR/var/log/cron.log 2>&1" | crontab -l
 
 # Start the cron service
 /usr/sbin/cron

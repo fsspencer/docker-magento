@@ -36,5 +36,9 @@ RUN ln -s /etc/apache2/sites-available/magento.conf /etc/apache2/sites-enabled/m
 
 RUN setup-cron
 
+# Install Composer
+
+RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
 VOLUME /var/www/html
 WORKDIR /var/www/html

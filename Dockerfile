@@ -25,6 +25,16 @@ RUN a2enmod rewrite
 RUN yes | pecl install xdebug && \
  echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.iniOLD
 
+ # Install oAuth
+
+RUN apt-get update \
+  	&& apt-get install -y \
+  	libpcre3 \
+  	libpcre3-dev \
+  	php-pear \
+  	&& pecl install oauth \
+  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
+
  # Configuring system
 
 ADD .docker/config/php.ini /usr/local/etc/php/php.ini
@@ -39,6 +49,14 @@ RUN setup-cron
 # Install Composer
 
 RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
+# Install Node, NVM, NPM and Grunt
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+  	&& apt-get install -y nodejs build-essential \
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
+    && npm i -g grunt-cli yarn \
+    && npm i -g gulp
 
 VOLUME /var/www/html
 WORKDIR /var/www/html

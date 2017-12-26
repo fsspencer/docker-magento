@@ -47,7 +47,7 @@ RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
   	&& apt-get install -y nodejs build-essential \
-  	&& npm i -g npm
+  	&& npm i -g npm \
     && npm i -g grunt-cli yarn \
     && npm i -g gulp
 

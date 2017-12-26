@@ -22,6 +22,7 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
 
 RUN usermod -u 1000 www-data
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 # Install XDebug
 

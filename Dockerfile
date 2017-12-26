@@ -7,6 +7,8 @@ ENV N98_MAGERUN_URL https://raw.githubusercontent.com/netz98/n98-magerun/$N98_MA
 RUN curl -o /usr/local/bin/n98-magerun $N98_MAGERUN_URL \
     && chmod +x /usr/local/bin/n98-magerun
 
+RUN ln -s /usr/local/bin/n98-magerun /usr/local/bin/n98
+
 RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg62-turbo libpng12-dev libfreetype6-dev libjpeg62-turbo-dev mysql-client git nano vim wget curl unzip tar cron" \
     && apt-get update && apt-get install -y $requirements && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo_mysql \
@@ -45,9 +47,11 @@ RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
   	&& apt-get install -y nodejs build-essential \
-    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
+  	&& npm i -g npm
     && npm i -g grunt-cli yarn \
     && npm i -g gulp
+
+chown -R www-data:www-data /var/www
 
 VOLUME /var/www/html
 WORKDIR /var/www/html

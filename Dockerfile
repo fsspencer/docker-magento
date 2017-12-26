@@ -51,7 +51,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && npm i -g grunt-cli yarn \
     && npm i -g gulp
 
-chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /var/www
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
